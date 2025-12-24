@@ -29,7 +29,17 @@ def get_video_info(url):
         'quiet': True,
         'no_warnings': True,
         'extract_flat': False,
-        'extractor_args': {'youtube': {'player_client': ['android', 'web']}},
+        'cookiefile': 'www.youtube.com_cookies.txt',
+        'extractor_args': {
+            'youtube': {
+                'player_client': ['android', 'ios', 'web'],
+                'skip': ['hls', 'dash']
+            }
+        },
+        'http_headers': {
+            'User-Agent': 'com.google.android.youtube/17.36.4 (Linux; U; Android 12; GB) gzip',
+            'Accept-Language': 'en-US,en;q=0.9',
+        }
     }
     
     try:
@@ -161,7 +171,17 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             'outtmpl': os.path.join(DOWNLOAD_DIR, f'{video_id}.%(ext)s'),
             'quiet': True,
             'no_warnings': True,
-            'extractor_args': {'youtube': {'player_client': ['android', 'web']}},
+            'cookiefile': 'www.youtube.com_cookies.txt',
+            'extractor_args': {
+                'youtube': {
+                    'player_client': ['android', 'ios', 'web'],
+                    'skip': ['hls', 'dash']
+                }
+            },
+            'http_headers': {
+                'User-Agent': 'com.google.android.youtube/17.36.4 (Linux; U; Android 12; GB) gzip',
+                'Accept-Language': 'en-US,en;q=0.9',
+            }
         }
         
         if quality == 'mp3':
